@@ -1,216 +1,179 @@
+<div dir="rtl">
+
 # 🎙️ NoMusic Podcast Cleaner
 
-**🌐 [العربية](README.ar.md) · English**
+**🌐 العربية · [English](README.en.md)**
 
 ![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
-![Platform](https://img.shields.io/badge/Platform-Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-lightgrey)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Local only](https://img.shields.io/badge/Privacy-100%25%20local%20%C2%B7%20no%20upload-brightgreen)
+![Platform](https://img.shields.io/badge/%D9%8A%D8%B9%D9%85%D9%84%20%D8%B9%D9%84%D9%89-Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-lightgrey)
+![License](https://img.shields.io/badge/%D8%A7%D9%84%D8%B1%D8%AE%D8%B5%D8%A9-MIT-green)
+![Local](https://img.shields.io/badge/%D8%A7%D9%84%D8%AE%D8%B5%D9%88%D8%B5%D9%8A%D8%A9-%D9%85%D8%AD%D9%84%D9%8A%20100%25%20%C2%B7%20%D8%A8%D8%AF%D9%88%D9%86%20%D8%B1%D9%81%D8%B9-brightgreen)
 
-Remove or reduce background music from podcasts, interviews, lectures, and
-talking videos — while keeping the **speech as clear as possible**.
+أداة تشيل أو تقلّل **الموسيقى الخلفية** من البودكاست، المقابلات، المحاضرات،
+والفيديوهات الكلامية — مع المحافظة على **وضوح الكلام** قدر الإمكان.
 
-Everything runs **locally** on your machine. No login, no account, no cloud
-upload. Your files never leave your computer.
+كل شي يشتغل **محلياً** على جهازك. بدون تسجيل دخول، بدون حساب، بدون رفع للإنترنت.
+ملفاتك ما تطلع من جهازك أبداً.
 
-> **Easiest start (Windows):** double-click `Run NoMusic.bat` — it sets
-> everything up on first run and opens in your browser.
-
----
-
-## What it does
-
-1. You drop in a **video** or **audio** file.
-2. It detects the type automatically.
-3. It separates the **speech/vocals** from the music using an AI source-separation
-   model.
-4. It lightly normalizes loudness so the result is comfortable to listen to.
-5. It exports:
-   - A **cleaned speech-only** file as **MP3 and WAV**.
-   - If the input was a video, a new **MP4** with the original picture and the
-     cleaned audio.
-
-Output files are saved to the `outputs/` folder.
-
-## What it can **not** guarantee
-
-- It is **not** perfect music removal. AI separation reduces music and often
-  removes it well, but faint artifacts or residual music can remain — especially
-  when music and speech overlap heavily.
-- Singing, heavy sound effects, or speech buried under loud music are the hardest
-  cases.
-- This V1 favors **speech clarity over extreme music removal**. It does not apply
-  aggressive noise reduction (that tends to make voices sound robotic).
-- Quality depends on the chosen mode and the source recording.
+> **أسهل تشغيل (ويندوز):** دبل-كليك على `Run NoMusic.bat` — يجهّز كل شي أول مرة
+> ويفتح في المتصفح تلقائياً.
 
 ---
 
-## Requirements
+## وش يسوي
 
-- **Python 3.11+**
-- **FFmpeg** installed and available on your `PATH` (used to extract and rebuild
-  audio/video). FFmpeg is **not** a pip package.
+1. تحط ملف **فيديو** أو **صوت** (أو أكثر من ملف دفعة وحدة).
+2. يكتشف نوعه تلقائياً.
+3. يفصل **الكلام** عن الموسيقى باستخدام نموذج ذكاء اصطناعي.
+4. يضبط مستوى الصوت بشكل خفيف عشان يكون مريح للسمع.
+5. يصدّر لك:
+   - ملف **كلام نظيف** بصيغة **MP3 و WAV**.
+   - لو الإدخال فيديو، فيديو **MP4** جديد بنفس الصورة الأصلية مع الصوت المنظّف.
 
-### Installing FFmpeg
+النتائج تنحفظ في مجلد `outputs/`.
 
-- **Windows:** download from <https://www.gyan.dev/ffmpeg/builds/> (or
-  `winget install Gyan.FFmpeg`), then ensure `ffmpeg` works in a new terminal.
-- **macOS:** `brew install ffmpeg`
-- **Linux (Debian/Ubuntu):** `sudo apt install ffmpeg`
+## وش **ما** يقدر يضمنه
 
-Verify with:
+- مو إزالة موسيقى مثالية. الذكاء الاصطناعي يقلّل الموسيقى وغالباً يشيلها زين،
+  بس ممكن تبقى بقايا خفيفة — خصوصاً لما الموسيقى والكلام متداخلين بقوة.
+- الغناء، المؤثرات الصوتية العالية، أو الكلام تحت موسيقى صاخبة = أصعب الحالات.
+- هذي النسخة تفضّل **وضوح الكلام على إزالة الموسيقى المتطرفة**، وما تستخدم تقليل
+  ضوضاء عدواني (لأنه يخلي الصوت آلي).
+
+---
+
+## المتطلبات
+
+- **Python 3.11 أو أحدث**
+- **FFmpeg** (لاستخراج وإعادة بناء الصوت/الفيديو).
+  > المجلد المضغوط الجاهز للمشاركة يضمّن FFmpeg، فما تحتاج تنصّبه.
+  > لو تستنسخ من GitHub، نصّبه:
+  > - **ويندوز:** `winget install Gyan.FFmpeg`
+  > - **ماك:** `brew install ffmpeg`
+  > - **لينكس:** `sudo apt install ffmpeg`
+
+---
+
+## التنصيب (من GitHub)
 
 ```bash
-ffmpeg -version
-```
-
----
-
-## Installation
-
-```bash
+git clone https://github.com/aragonaragon/nomusic-podcast-cleaner.git
 cd nomusic-podcast-cleaner
 
-# (recommended) create a virtual environment
 python -m venv .venv
-# Windows:
+# ويندوز:
 .venv\Scripts\activate
-# macOS/Linux:
+# ماك/لينكس:
 source .venv/bin/activate
 
 pip install -r requirements.txt
 ```
 
-> **GPU users:** the requirements install the CPU build of the separator.
-> For an NVIDIA GPU, install the GPU extra instead for a big speed-up:
+> **لمستخدمي كرت الشاشة (GPU):** نصّب نسخة الـ GPU لسرعة أكبر:
 > `pip install "audio-separator[gpu]"`
 
 ---
 
-## How to run
+## التشغيل
 
-### Easiest: one click (Windows)
+### الأسهل: ضغطة وحدة (ويندوز)
 
-Just **double-click `Run NoMusic.bat`**.
+دبل-كليك على **`Run NoMusic.bat`**.
 
-- The **first run** sets up a local environment and installs everything
-  automatically (this takes a few minutes — only happens once).
-- Every run after that starts in seconds and **opens your browser
-  automatically**.
-- It even finds FFmpeg installed via `winget` without needing a restart.
-- Keep the black window open while you use the app; close it to stop.
+- **أول مرة** يجهّز البيئة وينصّب كل شي تلقائياً (يأخذ كم دقيقة — مرة وحدة).
+- بعدها يشتغل بثواني و**يفتح المتصفح تلقائياً**.
 
-> Tip: right-click `Run NoMusic.bat` → **Send to → Desktop (create shortcut)** to
-> launch it from your desktop.
-
-### Manual (any OS)
+### يدوي (أي نظام)
 
 ```bash
 python app.py
 ```
 
-Gradio prints a local URL (usually `http://127.0.0.1:7860`) and opens it in your
-browser.
+يطلع رابط محلي (عادةً `http://127.0.0.1:7860`) ويفتح في المتصفح.
 
-1. Drop in **one or more** files (or click to browse). Multiple files are
-   processed one after another (batch).
-2. Pick a **Strength**.
-3. (Optional) tick **Quick test** to process only the first 30 seconds — handy
-   for trying a long file before committing to the whole thing.
-4. (Optional) leave **Even out the volume** on for a comfortable, consistent
-   listening level.
-5. (Optional) tick **Reduce background noise (light)** to gently clean up
-   residual hiss.
-6. Click **Start cleaning**. Use **Stop** to halt a long job — it finishes the
-   current chunk/file, then stops (anything already done is kept).
-7. Watch the **Status** line and progress bar; open the **Logs** panel for
-   detail. Download results from **Cleaned files** — they're also saved in
-   `outputs/`.
+### خطوات الاستخدام
 
-If a file has a lot of music mixed into the speech, you'll see a friendly
-**warning** that some music may remain (with a suggestion to try **Strong**).
+1. حط ملف أو أكثر.
+2. اختر **القوة** (Strength).
+3. (اختياري) فعّل **Quick test** لمعالجة أول 30 ثانية بس — ممتاز لتجربة ملف طويل.
+4. (اختياري) خلّ **Even out the volume** شغّال لمستوى صوت مريح.
+5. (اختياري) فعّل **Reduce background noise** لتنظيف خفيف للضوضاء.
+6. اضغط **Start cleaning**. زر **Stop** يوقف الشغل عند أقرب نقطة آمنة.
+7. حمّل النتائج من **Cleaned files** — وكمان محفوظة في `outputs/`.
 
-### Strength
+### القوة (Strength)
 
-| Strength     | Backend model        | Speed      | Best for |
-|--------------|----------------------|------------|----------|
-| **Fast**     | Kim_Vocal_2 (MDX)    | Fastest    | Quick checks / previews |
-| **Balanced** | UVR-MDX-NET-Voc_FT   | Medium     | Recommended everyday use |
-| **Strong**   | Demucs (htdemucs_ft) | Slowest    | Tough music, best quality |
+| القوة | النموذج | السرعة | الأفضل لـ |
+|-------|---------|--------|-----------|
+| **Fast** | Kim_Vocal_2 (MDX) | الأسرع | فحص سريع / معاينة |
+| **Balanced** | UVR-MDX-NET-Voc_FT | متوسطة | الاستخدام اليومي (موصى به) |
+| **Strong** | Demucs (htdemucs_ft) | الأبطأ | الموسيقى الصعبة، أفضل جودة |
 
-> The first time you use a strength, the model is **downloaded automatically**
-> (a few hundred MB). Later runs reuse the cached model.
+> أول مرة تستخدم قوة معيّنة، النموذج **ينزّل تلقائياً** (مئات الميجا). بعدها يستخدم النسخة المحفوظة.
 
 ---
 
-## Supported formats
+## الصيغ المدعومة
 
-- **Video:** `.mp4 .mov .mkv .avi .webm .m4v .flv`
-- **Audio:** `.mp3 .wav .m4a .aac .flac .ogg .opus .wma`
+- **فيديو:** `.mp4 .mov .mkv .avi .webm .m4v .flv`
+- **صوت:** `.mp3 .wav .m4a .aac .flac .ogg .opus .wma`
 
-Output: cleaned audio as **MP3 + WAV**, cleaned video as **MP4**.
-
----
-
-## Long files & mid-range machines
-
-This tool is built to run on **ordinary laptops** (no GPU, ~8 GB RAM), even for
-long recordings:
-
-- **Mono processing** — audio is converted to a single channel before
-  separation. Speech doesn't need stereo, and this roughly **halves memory use
-  and processing time**. Output is mono.
-- **Automatic chunking** — files longer than ~12 minutes are split into
-  ~10-minute pieces, cleaned one at a time, then stitched back together. Memory
-  stays bounded no matter how long the file is (a 2-hour podcast works the same
-  as a 5-minute one).
-- **Crash-safe resume** — finished chunks are cached during a run. If a long job
-  is interrupted, restarting it **skips the chunks already done** instead of
-  starting over. On success the cache is cleaned up automatically.
-- **Quick test** — tick it to process only the first 30 seconds, so you can
-  sanity-check a 2-hour file in seconds before committing.
-- **Seamless seams** — chunk boundaries are placed on quiet moments (silence
-  detection), so joins aren't audible and total length is preserved (audio/video
-  stay in sync).
-- **Auto-cleanup** — leftover scratch files older than a day are removed on
-  startup, so the `temp/` folder never grows out of control.
-
-## Performance notes (GPU/CPU)
-
-- On **CPU**, separation is the slow part — expect roughly **0.5×–3× the audio
-  length** depending on strength and machine (Fast is quickest, Strong/Demucs is
-  slowest). A 2-hour file can take a while — start it and walk away.
-- On a supported **NVIDIA GPU** (install `audio-separator[gpu]`), separation is
-  several times faster.
-- FFmpeg steps (extract / split / stitch / rebuild) are fast; rebuilding video
-  **copies** the original video stream, so there is no quality loss.
+المخرجات: صوت نظيف **MP3 + WAV**، وفيديو نظيف **MP4**.
 
 ---
 
-## Project structure
+## الملفات الطويلة والأجهزة المتوسطة
+
+البرنامج مصمّم يشتغل على **لابتوبات عادية** (بدون كرت شاشة، رام ~8 جيجا)، حتى للتسجيلات الطويلة:
+
+- **معالجة مونو** — يحوّل الصوت لقناة واحدة قبل الفصل. الكلام ما يحتاج ستيريو،
+  وهذا **يقلّل الذاكرة والوقت للنص تقريباً**.
+- **تقطيع تلقائي** — الملفات الأطول من ~12 دقيقة تنقسم لمقاطع ~10 دقائق، تتنظّف
+  وحدة وحدة، بعدين تتلصّق. الذاكرة تبقى محدودة مهما طال الملف (ملف ساعتين يشتغل
+  زي ملف 5 دقائق).
+- **استئناف بعد التعطّل** — المقاطع المنتهية تُحفظ أثناء التشغيل. لو تعطّل الشغل
+  وأعدته، **يتخطى المقاطع اللي خلصت** بدل ما يبدأ من الصفر.
+- **قص عند السكوت** — حدود المقاطع تنحط عند لحظات الهدوء، فالوصلات ما تنسمع
+  والمدة الكلية تبقى نفسها (الصوت والفيديو يضلون متزامنين).
+
+---
+
+## ملاحظات الأداء (GPU/CPU)
+
+- على **المعالج (CPU)**، الفصل هو الجزء البطيء — توقّع تقريباً **0.5×–3× مدة الصوت**
+  حسب القوة والجهاز (Fast الأسرع، Strong الأبطأ). ملف ساعتين يأخذ وقت — شغّله واتركه.
+- على **كرت شاشة NVIDIA** مدعوم (نصّب `audio-separator[gpu]`)، الفصل أسرع بكثير.
+- خطوات FFmpeg سريعة؛ إعادة بناء الفيديو **تنسخ** الصورة الأصلية بدون إعادة ترميز،
+  فما فيه أي فقدان للجودة.
+
+---
+
+## بنية المشروع
 
 ```
 nomusic-podcast-cleaner/
-  app.py                 # Gradio UI + pipeline orchestration
+  app.py                 # واجهة Gradio + تنظيم العملية
   requirements.txt
-  README.md
+  README.md / README.en.md
+  Run NoMusic.bat        # تشغيل بضغطة (ويندوز)
+  build_package.ps1      # بناء نسخة جاهزة للمشاركة
   src/
-    config.py            # paths, constants, mode → model map, chunk settings
-    media_utils.py       # file-type detection + all FFmpeg calls (split/concat/probe)
-    pipeline.py          # orchestration: mono prep, chunking, resume, stitching
-    separator.py         # speech/vocals isolation (audio-separator / Demucs)
-    audio_postprocess.py # loudness normalization + MP3/WAV export + music check
-  outputs/               # results land here
-  temp/                  # scratch files (safe to delete)
+    config.py            # الإعدادات والثوابت
+    media_utils.py       # كشف نوع الملف + كل أوامر FFmpeg
+    pipeline.py          # التنظيم: مونو، تقطيع، استئناف، لصق
+    separator.py         # فصل الكلام (audio-separator / Demucs)
+    audio_postprocess.py # ضبط الصوت + تصدير MP3/WAV + فحص الموسيقى
+  outputs/               # النتائج هنا
+  temp/                  # ملفات مؤقتة (آمن حذفها)
 ```
 
 ---
 
-## Troubleshooting
+## حل المشاكل
 
-- **"FFmpeg was not found"** — install FFmpeg and reopen your terminal.
-- **"No source-separation backend is installed"** — run
-  `pip install "audio-separator[cpu]"`.
-- **First run is slow / seems stuck** — it's downloading the model. Subsequent
-  runs are much faster.
-- **Out of memory** — try **Fast draft** mode, or close other apps.
+- **"FFmpeg was not found"** — نصّب FFmpeg وأعد فتح الطرفية.
+- **"No source-separation backend is installed"** — شغّل `pip install "audio-separator[cpu]"`.
+- **أول تشغيل بطيء / يبدو واقف** — هذا تنزيل النموذج. التشغيلات الجاية أسرع بكثير.
+- **نفدت الذاكرة** — جرّب قوة **Fast**، أو سكّر التطبيقات الثانية.
+
+</div>
