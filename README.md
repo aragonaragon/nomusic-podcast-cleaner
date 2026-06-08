@@ -1,10 +1,18 @@
-# NoMusic Podcast Cleaner
+# 🎙️ NoMusic Podcast Cleaner
+
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-lightgrey)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Local only](https://img.shields.io/badge/Privacy-100%25%20local%20%C2%B7%20no%20upload-brightgreen)
 
 Remove or reduce background music from podcasts, interviews, lectures, and
 talking videos — while keeping the **speech as clear as possible**.
 
 Everything runs **locally** on your machine. No login, no account, no cloud
 upload. Your files never leave your computer.
+
+> **Easiest start (Windows):** double-click `Run NoMusic.bat` — it sets
+> everything up on first run and opens in your browser.
 
 ---
 
