@@ -89,7 +89,22 @@ pip install -r requirements.txt
 
 ## How to run
 
-### Easiest: one click (Windows)
+### No install at all: portable build (Windows) — easiest for anyone
+
+To share with a non-technical person, use the **portable build**. It bundles its
+own Python and FFmpeg, so the recipient **installs nothing**.
+
+1. Build it once (on your machine):
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File build_portable.ps1
+   ```
+   Produces `dist\NoMusic Podcast Cleaner Portable\` (and a ~187 MB zip).
+2. Send the folder (or the zip) to the person.
+3. They unzip and **double-click `Run NoMusic.bat`**.
+   - The first run downloads the components automatically (internet, a few
+     minutes, once). After that it starts in seconds and opens the browser.
+
+### One click (if Python is installed)
 
 Just **double-click `Run NoMusic.bat`**.
 
