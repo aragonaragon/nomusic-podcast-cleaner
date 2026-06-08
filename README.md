@@ -1,5 +1,7 @@
 # 🎙️ NoMusic Podcast Cleaner
 
+**🌐 [العربية](README.ar.md) · English**
+
 ![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-lightgrey)
 ![License](https://img.shields.io/badge/License-MIT-green)
