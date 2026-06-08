@@ -1,0 +1,16 @@
+# NoMusic Podcast Cleaner — Python dependencies
+#
+# Python 3.11+ required.
+# FFmpeg must be installed separately (it is NOT a pip package) — see README.
+
+# --- UI ---
+gradio>=4.0,<6.0
+
+# --- Source separation (preferred backend) ---
+# CPU build. For NVIDIA GPU, install the GPU extra instead:
+#     pip install "audio-separator[gpu]"
+audio-separator[cpu]>=0.18
+
+# --- Optional fallback backend ---
+# If you prefer Demucs (or audio-separator won't install), uncomment:
+# demucs>=4.0

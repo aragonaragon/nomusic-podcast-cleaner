@@ -1,0 +1,28 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# --- Local environment marker (created on first run) ---
+.installed
+
+# --- Working folders: keep the folders, ignore their contents ---
+outputs/*
+!outputs/.gitkeep
+temp/*
+!temp/.gitkeep
+
+# --- Build artifacts ---
+dist/
+
+# --- Bundled FFmpeg (added at package time, not source) ---
+bin/
+
+# --- OS / editor cruft ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
