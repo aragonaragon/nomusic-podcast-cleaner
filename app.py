@@ -209,6 +209,49 @@ def process(files, mode, preview, normalize, denoise, export_audio, export_video
         yield emit("Something went wrong — see logs below.")
 
 
+THEME = gr.themes.Soft(
+    primary_hue="violet",
+    secondary_hue="purple",
+    neutral_hue="slate",
+    radius_size="lg",
+)
+
+CUSTOM_CSS = """
+.gradio-container {max-width: 1060px !important; margin: 0 auto !important;}
+#hero {text-align: center; padding: 30px 22px; border-radius: 20px; color: #fff;
+  background: linear-gradient(135deg, #7c3aed 0%, #9333ea 45%, #c026d3 100%);
+  box-shadow: 0 12px 32px rgba(147, 51, 234, .28); margin-bottom: 20px;}
+#hero .emoji {font-size: 2.6rem; line-height: 1;}
+#hero h1 {color: #fff !important; font-size: 2rem; margin: .25em 0 .15em; font-weight: 800;}
+#hero p {color: rgba(255, 255, 255, .92); max-width: 640px; margin: 0 auto; font-size: 1.02rem;}
+#hero .pills {margin-top: 14px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;}
+#hero .pill {background: rgba(255, 255, 255, .18); color: #fff; padding: 4px 12px;
+  border-radius: 999px; font-size: .82rem; font-weight: 600;}
+.card {border-radius: 18px !important; box-shadow: 0 4px 18px rgba(2, 6, 23, .06);
+  border: 1px solid rgba(2, 6, 23, .07); padding: 16px 18px !important;}
+.card-title {font-weight: 700; font-size: 1.05rem; margin: 0 0 12px;}
+#start-btn {font-weight: 800;}
+#footer {text-align: center; opacity: .7; font-size: .9rem; margin-top: 16px;}
+.setup-warn {border-left: 4px solid #f59e0b; background: #fff7ed;
+  padding: 12px 16px; border-radius: 12px; color: #7c2d12;}
+"""
+
+HERO_HTML = """
+<div id="hero">
+  <div class="emoji">🎙️</div>
+  <h1>NoMusic Podcast Cleaner</h1>
+  <p>Remove background music from podcasts, interviews, and talking videos —
+     and keep the speech crystal clear.</p>
+  <div class="pills">
+    <span class="pill">🔒 100% local</span>
+    <span class="pill">🚫 No upload</span>
+    <span class="pill">🎬 Audio + video</span>
+    <span class="pill">🆓 Free &amp; open source</span>
+  </div>
+</div>
+"""
+
+
 def build_ui() -> gr.Blocks:
     # Best-effort housekeeping so the temp folder doesn't grow forever.
     try:
@@ -218,61 +261,66 @@ def build_ui() -> gr.Blocks:
 
     ffmpeg_ok, ffmpeg_msg = check_setup()
 
-    with gr.Blocks(title=APP_TITLE) as demo:
-        gr.Markdown(f"# {APP_TITLE}")
-        gr.Markdown(APP_DESCRIPTION)
+    with gr.Blocks(title=APP_TITLE, theme=THEME, css=CUSTOM_CSS) as demo:
+        gr.HTML(HERO_HTML)
 
         if not ffmpeg_ok:
             gr.Markdown(
-                "### ⚠️ Setup needed\n"
+                "### ⚠️ Setup needed\n\n"
                 "```\n" + ffmpeg_msg + "\n```\n"
-                "_You can still open this page, but cleaning won't work until "
-                "FFmpeg is installed and you restart the app._"
+                "You can still open this page, but cleaning won't work until "
+                "FFmpeg is installed and you restart the app.",
+                elem_classes="setup-warn",
             )
 
-        with gr.Row():
-            with gr.Column():
-                file_input = gr.File(
-                    label="Drop one or more video/audio files here (or click to browse)",
-                    file_count="multiple",
-                    type="filepath",
-                )
-                mode = gr.Radio(
-                    choices=list(config.SEPARATION_MODES.keys()),
-                    value=config.DEFAULT_MODE,
-                    label="Strength",
-                    info=" · ".join(f"{k}: {v}" for k, v in config.MODE_HINTS.items()),
-                )
-                preview = gr.Checkbox(
-                    value=False,
-                    label=f"Quick test (only the first {config.PREVIEW_SECONDS} seconds)",
-                    info="Great for trying a long file fast before committing.",
-                )
-                normalize = gr.Checkbox(value=True, label="Even out the volume (recommended)")
-                denoise = gr.Checkbox(value=False, label="Reduce background noise (light)")
-                export_audio = gr.Checkbox(value=True, label="Save cleaned audio (MP3 + WAV)")
-                export_video = gr.Checkbox(
-                    value=True,
-                    label="Save cleaned video (only for video inputs)",
-                )
-                with gr.Row():
-                    start_btn = gr.Button("Start cleaning", variant="primary")
-                    stop_btn = gr.Button("Stop")
-
-            with gr.Column():
-                status = gr.Textbox(
-                    label="Status", lines=1, interactive=False, placeholder="Ready.",
-                )
-                warning = gr.Markdown(visible=False)
-                downloads = gr.Files(label="Cleaned files (download)", visible=False)
-                audio_out = gr.Audio(label="Preview — cleaned audio", visible=False)
-                video_out = gr.Video(label="Preview — cleaned video", visible=False)
-                with gr.Accordion("Logs", open=False):
-                    logs = gr.Textbox(
-                        label=None, lines=12, interactive=False,
-                        placeholder="Detailed step-by-step messages will appear here…",
-                        show_copy_button=True,
+        with gr.Row(equal_height=False):
+            with gr.Column(scale=1):
+                with gr.Group(elem_classes="card"):
+                    gr.Markdown("### 1 · Add files & choose options", elem_classes="card-title")
+                    file_input = gr.File(
+                        label="🎬 Drop video or audio files here (one or many)",
+                        file_count="multiple",
+                        type="filepath",
                     )
+                    mode = gr.Radio(
+                        choices=list(config.SEPARATION_MODES.keys()),
+                        value=config.DEFAULT_MODE,
+                        label="Strength",
+                        info=" · ".join(f"{k}: {v}" for k, v in config.MODE_HINTS.items()),
+                    )
+                    preview = gr.Checkbox(
+                        value=False,
+                        label=f"⚡ Quick test (only the first {config.PREVIEW_SECONDS} seconds)",
+                        info="Great for trying a long file fast before committing.",
+                    )
+                    normalize = gr.Checkbox(value=True, label="🔊 Even out the volume (recommended)")
+                    denoise = gr.Checkbox(value=False, label="✨ Reduce background noise (light)")
+                    export_audio = gr.Checkbox(value=True, label="💾 Save cleaned audio (MP3 + WAV)")
+                    export_video = gr.Checkbox(
+                        value=True,
+                        label="🎞️ Save cleaned video (only for video inputs)",
+                    )
+                    with gr.Row():
+                        start_btn = gr.Button("✨ Start cleaning", variant="primary",
+                                              scale=3, elem_id="start-btn")
+                        stop_btn = gr.Button("⏹ Stop", scale=1)
+
+            with gr.Column(scale=1):
+                with gr.Group(elem_classes="card"):
+                    gr.Markdown("### 2 · Results", elem_classes="card-title")
+                    status = gr.Textbox(
+                        label="Status", lines=1, interactive=False, placeholder="Ready.",
+                    )
+                    warning = gr.Markdown(visible=False)
+                    downloads = gr.Files(label="⬇️ Cleaned files (download)", visible=False)
+                    audio_out = gr.Audio(label="Preview — cleaned audio", visible=False)
+                    video_out = gr.Video(label="Preview — cleaned video", visible=False)
+                    with gr.Accordion("📋 Logs", open=False):
+                        logs = gr.Textbox(
+                            label=None, lines=12, interactive=False,
+                            placeholder="Detailed step-by-step messages will appear here…",
+                            show_copy_button=True,
+                        )
 
         run_event = start_btn.click(
             fn=process,
@@ -282,9 +330,10 @@ def build_ui() -> gr.Blocks:
         # Stop sets the flag AND cancels the running event.
         stop_btn.click(fn=_request_stop, inputs=None, outputs=status, cancels=[run_event])
 
-        gr.Markdown(
-            "_All processing happens locally on your machine. Long files are "
-            "handled in chunks. Output files are saved to the `outputs` folder._"
+        gr.HTML(
+            "<div id='footer'>All processing happens locally on your machine. "
+            "Long files are handled in chunks. Output files are saved to the "
+            "<code>outputs</code> folder.</div>"
         )
 
     return demo
