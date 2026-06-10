@@ -16,6 +16,12 @@ upload. Your files never leave your computer.
 > **Easiest start (Windows):** double-click `Run NoMusic.bat` — it sets
 > everything up on first run and opens in your browser.
 
+### ⬇️ Direct download (no install)
+
+[![Download](https://img.shields.io/badge/Download-Windows_Portable-7c3aed?style=for-the-badge&logo=github)](https://github.com/aragonaragon/nomusic-podcast-cleaner/releases/latest)
+
+Unzip → double-click `Run NoMusic.bat`. **No Python needed.**
+
 ![NoMusic Podcast Cleaner interface](docs/screenshot.png)
 
 ---

@@ -18,6 +18,12 @@
 > **أسهل تشغيل (ويندوز):** دبل-كليك على `Run NoMusic.bat` — يجهّز كل شي أول مرة
 > ويفتح في المتصفح تلقائياً.
 
+### ⬇️ التحميل المباشر (بدون تنصيب)
+
+[![Download](https://img.shields.io/badge/Download-Windows_Portable-7c3aed?style=for-the-badge&logo=github)](https://github.com/aragonaragon/nomusic-podcast-cleaner/releases/latest)
+
+فك الضغط ← دبل-كليك على `Run NoMusic.bat`. **ما يحتاج Python.**
+
 ![واجهة NoMusic Podcast Cleaner](docs/screenshot.png)
 
 ---
