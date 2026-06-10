@@ -102,6 +102,13 @@ Nothing to install. Just double-click  "Run NoMusic.bat"
 - Drop in audio/video files, click "Start cleaning".
   Results are saved in the "outputs" folder.
 
+What you need:
+- Windows 64-bit
+- About 3 GB of free disk space
+- 8 GB RAM recommended (4 GB minimum; it just runs slower)
+- Internet on the first run (to download components and the audio model)
+- A graphics card is NOT required.
+
 Everything runs on your own computer. Nothing is uploaded.
 "@ | Set-Content -Path (Join-Path $pkg "START HERE.txt") -Encoding UTF8
 

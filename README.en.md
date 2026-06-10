@@ -16,6 +16,8 @@ upload. Your files never leave your computer.
 > **Easiest start (Windows):** double-click `Run NoMusic.bat` — it sets
 > everything up on first run and opens in your browser.
 
+![NoMusic Podcast Cleaner interface](docs/screenshot.png)
+
 ---
 
 ## What it does
@@ -164,6 +166,31 @@ If a file has a lot of music mixed into the speech, you'll see a friendly
 - **Audio:** `.mp3 .wav .m4a .aac .flac .ogg .opus .wma`
 
 Output: cleaned audio as **MP3 + WAV**, cleaned video as **MP4**.
+
+---
+
+## Disk space & machine requirements
+
+**Disk space:**
+
+| Stage | Size |
+|-------|------|
+| Download (zip) | ~187 MB |
+| After install (first run) | ~1.9 GB |
+| + audio model (first use of each strength) | +0.3 to ~1 GB |
+
+> Keep **~2.5–3 GB** free to be comfortable.
+
+**Machine:**
+
+| Tier | Specs | Experience |
+|------|-------|------------|
+| Minimum | Windows 64-bit · 4 GB RAM · dual-core | Works but slow — use **Fast** + **Quick test** |
+| Recommended | 8 GB RAM · quad-core | Good with **Balanced** |
+| Best | 16 GB RAM, or an **NVIDIA** GPU | Fast with **Strong** |
+
+- **No GPU required** — runs on CPU. An NVIDIA GPU speeds it up a lot (GPU build).
+- **CPU speed:** roughly 0.5×–3× the audio length (Fast is fastest, Strong slowest).
 
 ---
 
